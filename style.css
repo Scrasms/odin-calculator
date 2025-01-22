@@ -10,8 +10,7 @@ button {
     width: 25%;
     background-color: rgb(253, 252, 237);
     font-size: 4vh;
-    border-style: solid;
-    border-width: 2px;
+    border: 2px solid rgb(202, 202, 194);
     border-radius: 8px;
 }
 
