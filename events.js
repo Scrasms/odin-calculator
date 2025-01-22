@@ -1,6 +1,5 @@
 import { operate } from './calculate.js';
-
-const MAX_DISPLAY_LENGTH = 7;
+const MAX_DISPLAY_LENGTH = 8;
 
 // Global variables to store the operator and the two numbers being operated on
 let num1 = '0';
@@ -73,6 +72,7 @@ function handleOperation(event, display) {
 
     // If equal sign is pressed, perform operation and display the result
     if (event.target.id === 'eql') {
+        // Handle cases where equal sign is pressed prematurely
         if (!isValidOperation()) {
             display.textContent = 'Invalid';
             clearState();
@@ -88,7 +88,7 @@ function handleOperation(event, display) {
         
         // Display result and reset state
         } else {
-            display.textContent = result;
+            display.textContent = truncateNumber(result);
             num1 = result;
             num2 = '';
             hasOperator = false;
@@ -125,12 +125,12 @@ function handleNegative(display) {
         resultDisplayed = false;
 
     } else if (!hasOperator) {
-        if (num1.length <= MAX_DISPLAY_LENGTH) { 
+        if (num1.length < MAX_DISPLAY_LENGTH) { 
             num1 = toggleNegative(num1);
         }
         display.textContent = (num1);
     } else {
-        if (num2.length <= MAX_DISPLAY_LENGTH) {
+        if (num2.length < MAX_DISPLAY_LENGTH) {
             num2 = toggleNegative(num2);
         }
         display.textContent = num2;
@@ -146,14 +146,14 @@ function handleDot(display) {
         hasDot = true;;
 
     } else if (!hasOperator) {
-        if (!hasDot && num1.length <= MAX_DISPLAY_LENGTH) { 
+        if (!hasDot && num1.length < MAX_DISPLAY_LENGTH) { 
             num1 += '.';
             display.textContent = num1;
             hasDot = true;
         }
 
     } else {
-        if (!hasDot && num2.length <= MAX_DISPLAY_LENGTH) { 
+        if (!hasDot && num2.length < MAX_DISPLAY_LENGTH) { 
             num2 += '.';
             display.textContent = num2;
             hasDot = true;
@@ -189,7 +189,7 @@ function toggleNegative(num) {
 function appendDigit(num, event) {
     if (num === '0') {
         num = event.target.id;
-    } else if (num.length <= MAX_DISPLAY_LENGTH) { 
+    } else if (num.length < MAX_DISPLAY_LENGTH) { 
         num += event.target.id;
     }
 
@@ -197,11 +197,23 @@ function appendDigit(num, event) {
 }
 
 function truncateNumber(num) {
-    if (num.toString().length > MAX_DISPLAY_LENGTH) {
-        const dp = num.toString().length - MAX_DISPLAY_LENGTH;
+    // If the integer is too big, display 'too big'
+    const numStr = num.toString();
+    if (numStr.length > MAX_DISPLAY_LENGTH && !numStr.includes('.')) {
+       num = 'too big';
+       
+       // Here, the number is a decimal that can be rounded
+    } else {
+        const digitsBeforeDP = numStr.indexOf('.');  // Get position of decimal point
         
-        // Round answer to variable d.p. based on how much num exceeds max
-        num = Math.ceil(result * Math.pow(10, dp)) / Math.pow(10, dp);
+        // If the total digits exceed MAX_DISPLAY_LENGTH, truncate after the decimal point
+        if (numStr.length > MAX_DISPLAY_LENGTH) {
+            const maxDigitsAfterDP = MAX_DISPLAY_LENGTH - digitsBeforeDP - 1;
+
+            // Round to variable dp to always fit the display box
+            num = Math.ceil(num * Math.pow(10, maxDigitsAfterDP)) / Math.pow(10, maxDigitsAfterDP);
+        }
+
     }
     return num;
 }
