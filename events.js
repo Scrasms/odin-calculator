@@ -53,7 +53,7 @@ function handleNumber(event, display) {
     if (resultDisplayed) {
         num1 = event.target.id;
         num2 = '';
-        display.textContent = truncateNumber(num1);
+        display.textContent = num1;
         resultDisplayed = false;
 
     // If operator has already been inputted, the next number should be num2
@@ -125,14 +125,10 @@ function handleNegative(display) {
         resultDisplayed = false;
 
     } else if (!hasOperator) {
-        if (num1.length < MAX_DISPLAY_LENGTH) { 
-            num1 = toggleNegative(num1);
-        }
-        display.textContent = (num1);
+        num1 = toggleNegative(num1);
+        display.textContent = num1;
     } else {
-        if (num2.length < MAX_DISPLAY_LENGTH) {
-            num2 = toggleNegative(num2);
-        }
+        num2 = toggleNegative(num2);
         display.textContent = num2;
     }
 }
@@ -141,7 +137,7 @@ function handleDot(display) {
     // When result is displayed, clear the display and follow with 0.
     if (resultDisplayed) {
         num1 = '0.';
-        display.textContent = truncateNumber(num1);
+        display.textContent = num1;
         resultDisplayed = false;
         hasDot = true;;
 
@@ -175,6 +171,8 @@ function isValidOperation() {
 }
 
 function toggleNegative(num) {
+    num = num.toString();
+
     if (num === '0') return num;
 
     if (num.startsWith('-')) {
