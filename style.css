@@ -5,11 +5,15 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+body {
+    background-color: rgb(226, 224, 200);
+}
+
 button {
     height: auto;
     width: 25%;
     background-color: rgb(253, 252, 237);
-    font-size: 4vh;
+    font-size: 2rem;
     border: 2px solid rgb(202, 202, 194);
     border-radius: 8px;
 }
@@ -33,8 +37,10 @@ button:active {
     align-items: center;
     gap: 1vh;
     background-color: slategrey;
-    min-height: 80vh;
-    width: 30vw;
+    width: 80vw;
+    height: 80vh;
+    max-width: 400px;
+    max-height: 500px;
     margin: 10vh auto;
     padding: 2vh;
     border-radius: 5px;
@@ -48,16 +54,16 @@ button:active {
 
 .display {
     min-height: 20%;
+    max-width: 100%;
     background: rgb(225, 255, 181);
     text-align: right;
     text-shadow: 1px 1px 2px black;
-    font-size: 5vw;
+    font-size: 3rem;
     padding: 1vw;
     border-color: rgb(195, 218, 162);
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    max-width: 100%;
 }
 
 .button-container {
