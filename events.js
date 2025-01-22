@@ -177,7 +177,7 @@ function toggleNegative(num) {
 
     if (num.startsWith('-')) {
         num = num.slice(1);
-    } else {
+    } else if (num.length < MAX_DISPLAY_LENGTH) {
         num = '-' + num;
     }
 
