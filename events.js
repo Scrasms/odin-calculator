@@ -53,7 +53,7 @@ function handleNumber(event, display) {
     if (resultDisplayed) {
         num1 = event.target.id;
         num2 = '';
-        display.textContent = num1;
+        display.textContent = truncateNumber(num1);
         resultDisplayed = false;
 
     // If operator has already been inputted, the next number should be num2
@@ -121,7 +121,7 @@ function handleOperation(event, display) {
 function handleNegative(display) {
     if (resultDisplayed) {
         num1 = toggleNegative(num1.toString());
-        display.textContent = num1;
+        display.textContent = truncateNumber(num1);
         resultDisplayed = false;
 
     } else if (!hasOperator) {
@@ -141,7 +141,7 @@ function handleDot(display) {
     // When result is displayed, clear the display and follow with 0.
     if (resultDisplayed) {
         num1 = '0.';
-        display.textContent = num1;
+        display.textContent = truncateNumber(num1);
         resultDisplayed = false;
         hasDot = true;;
 
