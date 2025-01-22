@@ -126,10 +126,10 @@ function handleNegative(display) {
 
     } else if (!hasOperator) {
         num1 = toggleNegative(num1);
-        display.textContent = num1;
+        display.textContent = truncateNumber(num1);
     } else {
         num2 = toggleNegative(num2);
-        display.textContent = num2;
+        display.textContent = truncateNumber(num2);
     }
 }
 
