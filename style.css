@@ -51,9 +51,13 @@ button:active {
     background: rgb(225, 255, 181);
     text-align: right;
     text-shadow: 1px 1px 2px black;
-    font-size: 12vh;
+    font-size: 5vw;
     padding: 1vw;
     border-color: rgb(195, 218, 162);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    max-width: 100%;
 }
 
 .button-container {
@@ -89,10 +93,13 @@ button:active {
     background-color: rgb(137, 158, 158);
 }
 
+#AC, #eql {
+    width: 50%;
+}
+
 #eql {
     background-color: rgb(203, 212, 203);
     border-color: rgb(163, 170, 163);
-    width: 50%;
 }
 
 #eql:hover {

@@ -1,20 +1,20 @@
-function add(a, b) {
+export function add(a, b) {
     return a + b;
 }
 
-function subtract(a, b) {
+export function subtract(a, b) {
     return a - b;
 }
 
-function multiply(a, b) {
+export function multiply(a, b) {
     return a * b;
 }
 
-function divide(a, b) {
-    if (b != 0) return a / b;
+export function divide(a, b) {
+    return a / b;
 }
 
-function operate(a, b, operator) {
+export function operate(a, b, operator) {
     let result;
     switch (operator) {
         case 'add':
@@ -31,9 +31,12 @@ function operate(a, b, operator) {
 
         case 'div':
             result = divide(a, b);
+            
             break;
     }
 
     // Round answer to 6 d.p.
     result = Math.ceil(result * 1000000) / 1000000;
+
+    return result;
 }
